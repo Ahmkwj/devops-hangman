@@ -196,8 +196,13 @@ function nextRound() {
     gameState.wrongGuesses = 0;
     gameState.gameActive = true;
     
-    const randomIndex = Math.floor(Math.random() * wordBank.length);
-    gameState.currentWord = wordBank[randomIndex];
+    let newWord;
+    do {
+        const randomIndex = Math.floor(Math.random() * wordBank.length);
+        newWord = wordBank[randomIndex];
+    } while (newWord === gameState.currentWord && wordBank.length > 1);
+    
+    gameState.currentWord = newWord;
     
     document.getElementById('gameStatus').classList.remove('show');
     document.getElementById('gameStatus').className = 'game-status';
