@@ -164,8 +164,19 @@ function startGame() {
     const p1Name = document.getElementById('player1Name').value.trim();
     const p2Name = document.getElementById('player2Name').value.trim();
     
-    gameState.player1.name = p1Name || 'Player 1';
-    gameState.player2.name = p2Name || 'Player 2';
+    // Validate player names are not empty
+    if (p1Name === '' || p2Name === '') {
+        alert('Both player names are required. Please enter names for both players.');
+        return;
+    }
+    
+    if (p1Name.toLowerCase() === p2Name.toLowerCase()) {
+        alert('Player names must be different. Please use different names.');
+        return;
+    }
+    
+    gameState.player1.name = p1Name;
+    gameState.player2.name = p2Name;
     
     document.getElementById('player1Display').textContent = gameState.player1.name;
     document.getElementById('player2Display').textContent = gameState.player2.name;
