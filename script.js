@@ -118,8 +118,20 @@ function addWord() {
 
 function editWord(index) {
     const newWord = prompt('Edit word:', wordBank[index]);
-    if (newWord) {
-        wordBank.splice(index, 1);
+    if (newWord !== null && newWord.trim() !== '') {
+        const word = newWord.trim().toUpperCase();
+        
+        if (!/^[A-Z]+$/.test(word)) {
+            alert('Only uppercase letters (A-Z) are allowed.');
+            return;
+        }
+        
+        if (wordBank.includes(word) && word !== wordBank[index]) {
+            alert('This word already exists in the word bank.');
+            return;
+        }
+        
+        wordBank[index] = word;
         saveWordBank();
         displayWordBank();
     }
